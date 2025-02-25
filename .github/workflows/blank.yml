@@ -1,0 +1,24 @@
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      FIRST_VAR: apple
+      SECOND_VAR: apple_juice
+    steps:
+      - run: echo "Variables set"
+
+  use_vars:
+    runs-on: ubuntu-latest
+    needs: setup
+    env:
+      FIRST_VAR: ${{ needs.setup.outputs.FIRST_VAR }}
+      SECOND_VAR: ${{ needs.setup.outputs.SECOND_VAR }}
+    steps:
+      - run: |
+          echo "FIRST_VAR is $FIRST_VAR"
+          echo "SECOND_VAR is $SECOND_VAR"
