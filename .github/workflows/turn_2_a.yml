@@ -1,0 +1,11 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    steps:
+      - name: Set environment variables
+        run: |
+          echo "FIRST_VAR=value" >> $GITHUB_ENV
+          echo "SECOND_VAR=${FIRST_VAR}-suffix" >> $GITHUB_ENV
