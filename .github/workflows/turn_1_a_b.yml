@@ -1,0 +1,19 @@
+on:
+  push:
+    branches:
+      - main
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Set variables
+        id: setup_vars
+        run: |
+          echo "FIRST_VAR=apple" >> $GITHUB_ENV
+          echo "SECOND_VAR=apple_juice" >> $GITHUB_ENV
+      
+      - name: Use variables
+        run: |
+          echo "SECOND_VAR is $SECOND_VAR"
