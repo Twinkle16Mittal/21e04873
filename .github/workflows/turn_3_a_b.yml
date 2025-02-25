@@ -1,0 +1,23 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+jobs:
+  set-env-vars:
+    runs-on: ubuntu-latest
+    outputs:
+      API_ENDPOINT: ${{ steps.set-api.outputs.endpoint }}
+    steps:
+      - id: set-api
+        run: echo "endpoint=https://example.com/api" >> $GITHUB_OUTPUT
+
+  use-vars:
+    needs: set-env-vars
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Using endpoint ${{ needs.set-env-vars.outputs.API_ENDPOINT }}"
