@@ -1,0 +1,11 @@
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      FIRST_VAR: apple  
+
+    steps:
+      - env:
+          SECOND_VAR: "${{ env.FIRST_VAR }}_juice"
+        run: |
+          echo "SECOND_VAR is $SECOND_VAR"
